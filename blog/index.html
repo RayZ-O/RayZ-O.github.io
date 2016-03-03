@@ -1,0 +1,174 @@
+---
+layout: default
+title: Rui Zhang's Blog
+---
+</br>
+<div class="row">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#latest" data-toggle="tab">Latest</a></li>
+      <li><a href="#algorithms" data-toggle="tab">Algorithms</a></li>
+      <li><a href="#datastructures" data-toggle="tab">Data Structures</a></li>
+      <li><a href="#cpp" data-toggle="tab">C++</a></li>
+      <li><a href="#java" data-toggle="tab">Java</a></li>
+      <li><a href="#oop" data-toggle="tab">Object-Oriented Design</a></li>
+      <li><a href="#multithreading" data-toggle="tab">Multithreading</a></li>
+      <li><a href="#fp" data-toggle="tab">Functional Programming</a></li>
+      <li><a href="#misc" data-toggle="tab">Misc</a></li>
+    </ul>
+
+    <div class="tab-content" style="margin-left: 20px;">
+      <div id="latest" class="tab-pane fade in active">
+       </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'all' %}
+               <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div id="cpp" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+            {% if pc contains 'cpp' %}
+              <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div id="java" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'java' %}
+               <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}          
+        {% endfor %}
+      </div>
+      <div id="algorithms" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'algorithms' %}
+             <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div id="datastructures" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'datastructures' %}
+             <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div id="oop" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'oop' %}
+             <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div id="multithreading" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'multithreading' %}
+             <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div id="fp" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'fp' %}
+             <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+      <div id="misc" class="tab-pane fade">
+        </br>
+        {% for post in site.posts %}
+          {% for pc in post.categories %}
+             {% if pc contains 'misc' %}
+             <div class="row posts">
+                <a href="{{ post.url }}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;
+                <span>
+                  {{ post.date | date: "%B %-d  %Y"}}</br>
+                  {{ post.content | strip_html | truncatewords:45}}
+                </span>
+              </div>
+              </br>
+            {% endif %}
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+<div>

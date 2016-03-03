@@ -1,0 +1,17 @@
+.list ul {
+  list-style-type: none;
+}
+
+.list li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  /*border-bottom: 1px solid #ccc;*/
+}
+
+.list li a:hover {
+  font-size: 25px;
+  background: #f6f6f6;
+}
+
+.list span {
+	font: 15px Helvetica, Verdana, sans-serif;
+}

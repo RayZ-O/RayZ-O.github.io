@@ -1,1 +1,2 @@
-# rayz-o.github.io
+# RayZ-O.github.io
+personal website
