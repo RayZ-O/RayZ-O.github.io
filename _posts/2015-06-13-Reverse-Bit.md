@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Reverse Bits optimization: Piecewise Cache"
+title: "Reverse Bits optimization: Fragment Cache"
 categories: [all, algorithms]
 date: 2015-06-13
 author: Rui Zhang
@@ -18,7 +18,7 @@ void reverse(std::vector<int> &v) {
     }
 }
 {% endhighlight %}
-The idea is simple. Swap the first and last, second and second last ... and so on.
+The idea is simple. Swap the first and the last, the second and the second last ... and so on.
 
 ### Reverse bits of an integer
 This is an easy problem on leetcode: [190. Reverse Bits](https://leetcode.com/problems/reverse-bits/). The idea is straightforward. 
@@ -123,7 +123,7 @@ Rerun the test 10 times:
 |10|0|
 {: class="table table-striped table-nonfluid"}
 
-Lol, the cache is only hit once. By the way, this proves the uniform distribution generator in standard library is really good.
+Lol, the cache is only hit once. By the way, it proves the uniform distribution generator in standard library is really good.
 
 #### Second Try
 How can we increase the cache hit ratio?  
@@ -183,7 +183,7 @@ uint32_t reverse32Bits(uint32_t n) {
 
 Runtime:
 
-||non-cached | cached|piecewise cached|
+||non-cached | cached|Fragment cached|
 |:---:|:---:|:------:|:------:|
 |Total|29.160s|3m12.994s|1m52.217s|
 |Average|2.916s|19.299s|11.222s|
@@ -248,7 +248,7 @@ uint32_t reverse32Bits(uint32_t n) {
     
 Runtime:
 
-||non-cached |cached|piecewise cached|piecewise cached array|
+||non-cached |cached|Fragment cached|Fragment cached array|
 |:---:|:---:|:------:|:------:|:------:|
 |Total|29.160s|3m12.994s|1m52.217s|17.685s|
 |Average|2.916s|19.299s|11.222s|1.768s|

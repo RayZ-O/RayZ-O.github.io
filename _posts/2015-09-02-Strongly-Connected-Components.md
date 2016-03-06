@@ -33,14 +33,14 @@ void dfs(std::vector<std::vector<int> &graph, int u) {
     graph[u].state = State::FINISHED;
 }
 {% endhighlight %}
+When a vertex u is traversing its neighbours
+**1.Tree edge:** if a neighbours v is UNSEEN, then Edge (u, v) is a tree edge.  
+**2.Back edge:** if a neighbours v is already mark as SEEN but not FINISH, then Edge (u, v) is a back edge.
 
-**Tree edge:** When a vertex u is traversing its adjacency list, if a neighbours v is UNSEEN, then Edge (u, v) is a tree edge.  
-**Back edge:** When a vertex u is traversing its neighbours, if a neighbours v is already mark as SEEN, then Edge (u, v) is a back edge.
+![fig2]
+This is the DFS tree of the above graph, green edges are tree edges and red edges are back edges. Tree edges form a spanning tree of the graph. Back edges point to an ancestor in the DFS tree.
 
-The type of edges provide important information about a graph:
-
-* For a connected graph, tree edges form a spanning tree of the graph  
-* A directed graph is acyclic if and only if it has no back edges.
+Back edges provide another important information about a graph: A directed graph is acyclic if and only if it has no back edges.
 
 #### Algorithm details
 As mentioned above, Tarjan's algorthm maintain a stack to store the nodes that not yet assiged to a component. Moreover, we need to add 2 metadata field to each vertex: discovered time and "low value".
@@ -50,8 +50,6 @@ As mentioned above, Tarjan's algorthm maintain a stack to store the nodes that n
 	* u's own discovered time
 	* low value of a neighbour v where (u, v) is a tree edge
 	* the discovered time of a neighbour v where (u, v) is a back edge
-
-
 
 The following code shows how to update discover(discovered time) and low(low value) during DFS.
 {% highlight c++ %}
@@ -75,6 +73,9 @@ void dfs(std::vector<std::vector<int> &graph, int u) {
     graph[v].state = State::FINISHED;
 }
 {% endhighlight %}
+Notice that when (u, v) is a tree edge, the comparison between low of u and low of u's neighbour v is made after DFS vertex v, because low of v is undefined before visiting v.
+
+It's somewhat complex. Let's see a live example:
 
 
 
