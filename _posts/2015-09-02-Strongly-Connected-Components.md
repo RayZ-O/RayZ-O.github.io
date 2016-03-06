@@ -37,7 +37,7 @@ When a vertex u is traversing its neighbours
 **1.Tree edge:** if a neighbours v is UNSEEN, then Edge (u, v) is a tree edge.  
 **2.Back edge:** if a neighbours v is already mark as SEEN but not FINISH, then Edge (u, v) is a back edge.
 
-![fig2]
+![fig2]  
 This is the DFS tree of the above graph, green edges are tree edges and red edges are back edges. Tree edges form a spanning tree of the graph. Back edges point to an ancestor in the DFS tree.
 
 Back edges provide another important information about a graph: A directed graph is acyclic if and only if it has no back edges.
@@ -75,10 +75,77 @@ void dfs(std::vector<std::vector<int> &graph, int u) {
 {% endhighlight %}
 Notice that when (u, v) is a tree edge, the comparison between low of u and low of u's neighbour v is made after DFS vertex v, because low of v is undefined before visiting v.
 
-It's somewhat complex. Let's see a live example:
+It's somewhat complex. Let's see a live example:  
 
+1. Start from vertex A, A.discover = A.low = 1.  
+![fig3]  
 
+2. Visit B, G, F, update discover and low.  
+![fig4] ![fig5] ![fig6]  
 
+3. Encounter back edge (F, B), update F.low = B.discover.  
+![fig7]  
+
+4. All edges of F are visited, back track to G, F.low is smaller than G.low, update G.low = F.low.  
+![fig8]  
+
+5. Visit H, I.  
+![fig9] ![fig10]
+
+6. Find back edge (I, H), update I.low = H.low.  
+![fig11]  
+
+7. Visit J, J has no out edge, back track to B.  
+![fig12]  
+
+8. Visit D, E.  
+![fig13] ![fig14]  
+
+9. See J again, (E, J) is not tree edge or back edge, nothing to do.  
+![fig15]  
+
+10. Update E.low = D.discover.  
+![fig16]  
+
+11. Back track to A, (A, F) is not tree edge or back edge.  
+![fig17]  
+
+The magic happens. All vertices in the same component have the same low value.
+To track the strongly connected components, we can use a stack to store the vertices during DFS. For a vertex u, if discover time and low value is equal after visiting all its neighbours, it is the root of a strongly connected component. Pop vertices from the stack till we get u, they form a strongly connected component rooted at u.
+
+{% highlight c++ %}
+enum class State {SEEN, UNSEEN, FINISHED}; // since C++11
+int time = 0;                              // global timestamp
+std::vector<std::vector<int>> SCC;
+
+void dfs(std::vector<std::vector<int> &graph, int u, stack<>& st) {
+    time++;
+    graph[u].discover = time;
+    graph[u].low = time;    
+    graph[u].state = State::SEEN;
+    st.push(u);
+    for (int v : graph[u].adjs) {
+        if (graph[v].state == State::UNSEEN) { // Tree Edges
+            dfs(graph, v);
+            graph[u].low = min(graph[u].low, graph[v].low);
+        } else if (graph[v].state == State::SEEN) {   // Back Edges
+            graph[u].low = min(graph[u].low, graph[v].discover);
+        }
+    }    
+    graph[v].state = State::FINISHED;
+    
+    if (graph[u].discover == graph[u].low) {
+        vector<int> component;
+        while (st.top() != u) {
+            component.push_back(st.top());
+            st.pop();
+        }
+        component.push_back(st.top());
+        st.pop();
+        SCC.push_back(component);
+    }
+}
+{% endhighlight %}
 
 Reference:
 
@@ -97,3 +164,23 @@ Reference:
 [fig6]: /assets/SCC/fig6.png
 
 [fig7]: /assets/SCC/fig7.png
+
+[fig8]: /assets/SCC/fig8.png
+
+[fig9]: /assets/SCC/fig9.png
+
+[fig10]: /assets/SCC/fig10.png
+
+[fig11]: /assets/SCC/fig11.png
+
+[fig12]: /assets/SCC/fig12.png
+
+[fig13]: /assets/SCC/fig13.png
+
+[fig14]: /assets/SCC/fig14.png
+
+[fig15]: /assets/SCC/fig15.png
+
+[fig16]: /assets/SCC/fig16.png
+
+[fig17]: /assets/SCC/fig17.png
