@@ -15,7 +15,7 @@ For example, in the following graph, the strongly connected components are {A} {
 There are two classic algorithms solve strongly connected component problem in linear time. Both of them are [DFS](https://en.wikipedia.org/wiki/Depth-first_search)-based algorithms. Kosaraju's algorthm uses two passes of DFS while Tarjan's algorthm runs one pass of DFS and maintians a stack for nodes that have been visited but not yet assigned to any component.
 
 ### Tarjan's algorthm
-Tarjan's algorthm is published by Robert Tarjan in 1972. He's also the co-inventor of both [splay trees](https://en.wikipedia.org/wiki/Splay_tree) and [Fibonacci heaps](https://en.wikipedia.org/wiki/Fibonacci_heap).
+Tarjan's algorthm is published by Robert Tarjan in 1972. He's also the co-inventor of both [splay trees](https://en.wikipedia.org/wiki/Splay_tree) and [Fibonacci heaps](https://en.wikipedia.org/wiki/Fibonacci_heap)[^2].
 
 #### Tree Edge & Back Edge
 During the DFS, there are three possible states for a vertex: seen, unseen, finished. Initally all vertice are marked as unseen, when an unseen vertex is first visited, its state changes to seen. After a vertex traverse all its neighbours, it becomes finished. Here comes the C++ code:  
@@ -33,7 +33,7 @@ void dfs(std::vector<std::vector<int> &graph, int u) {
     graph[u].state = State::FINISHED;
 }
 {% endhighlight %}
-When a vertex u is traversing its neighbours
+When a vertex u is traversing its neighbours  
 **1.Tree edge:** if a neighbours v is UNSEEN, then Edge (u, v) is a tree edge.  
 **2.Back edge:** if a neighbours v is already mark as SEEN but not FINISH, then Edge (u, v) is a back edge.
 
@@ -46,7 +46,7 @@ Back edges provide another important information about a graph: A directed graph
 As mentioned above, Tarjan's algorthm maintain a stack to store the nodes that not yet assiged to a component. Moreover, we need to add 2 metadata field to each vertex: discovered time and "low value".
 
 * discovered time stores when this vertex is first discovered
-* The low value is tricky. In the DFS-tree form by all Tree Edges, low of a vertex u is the dicovered time of the topmost reachable ancestor via the subtree of u. For a vertex u, the low value records the minimum value among: 
+* The low value is tricky. In the DFS-tree form by all Tree Edges, low of a vertex u is the dicovered time of the topmost reachable ancestor via the subtree of u[^3]. For a vertex u, the low value records the minimum value among: 
 	* u's own discovered time
 	* low value of a neighbour v where (u, v) is a tree edge
 	* the discovered time of a neighbour v where (u, v) is a back edge
@@ -111,14 +111,14 @@ It's somewhat complex. Let's see a live example:
 ![fig17]  
 
 The magic happens. All vertices in the same component have the same low value.
-To track the strongly connected components, we can use a stack to store the vertices during DFS. For a vertex u, if discover time and low value is equal after visiting all its neighbours, it is the root of a strongly connected component. Pop vertices from the stack till we get u, they form a strongly connected component rooted at u.
+To track the strongly connected components, we can use a stack to store the vertices during DFS. For a vertex u, if its discover time is equal to low value after visiting all its neighbours, it is the root of a strongly connected component. Pop vertices from the stack till we get u, they form a strongly connected component rooted at u.
 
 {% highlight c++ %}
 enum class State {SEEN, UNSEEN, FINISHED}; // since C++11
 int time = 0;                              // global timestamp
 std::vector<std::vector<int>> SCC;
 
-void dfs(std::vector<std::vector<int> &graph, int u, stack<>& st) {
+void dfs(std::vector<std::vector<int> &graph, int u, stack<int>& st) {
     time++;
     graph[u].discover = time;
     graph[u].low = time;    
@@ -133,7 +133,7 @@ void dfs(std::vector<std::vector<int> &graph, int u, stack<>& st) {
         }
     }    
     graph[v].state = State::FINISHED;
-    
+
     if (graph[u].discover == graph[u].low) {
         vector<int> component;
         while (st.top() != u) {
@@ -147,9 +147,13 @@ void dfs(std::vector<std::vector<int> &graph, int u, stack<>& st) {
 }
 {% endhighlight %}
 
-Reference:
+**Reference:**
 
 [^1]: [Introduction to Algorithms, 3rd Edition](http://www.amazon.com/Introduction-Algorithms-Edition-Thomas-Cormen/dp/0262033844)
+
+[^2]: [Wikipedia: Strongly connected component](https://en.wikipedia.org/wiki/Strongly_connected_component)
+
+[^3]: [GeeksforGeeks: Tarjan’s Algorithm to find Strongly Connected Components](http://www.geeksforgeeks.org/tarjan-algorithm-find-strongly-connected-components/)
 
 [fig1]: /assets/SCC/fig1.png
 

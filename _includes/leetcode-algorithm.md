@@ -257,7 +257,7 @@
 | 12| Integer to Roman| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/IntegerToRoman.cc)|
 | 11| Container With Most Water| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ContainerWithMostWater.cc)|
 | 10| Regular Expression Matching| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/RegularExpressionMatching.cc)|
-| 9| Palindrome Number| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PalindromeNumber.cc), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/palindrome_number.py), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/PalindromeNumber.java)|
+| 9| Palindrome Number| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PalindromeNumber.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/PalindromeNumber.java), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/palindrome_number.py)|
 | 8| String to Integer (atoi)| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/StringToInteger.cc) |
 | 7| Reverse Integer| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ReverseInteger.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ReverseInteger.java), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/reverse_integer.py)|
 | 6| ZigZag Conversion| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ZigZagConversion.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ZigZagConversion.java)|
