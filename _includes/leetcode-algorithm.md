@@ -131,7 +131,7 @@
 | 138| Copy List with Random Pointer| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/CopyListWithRandomPointer.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/CopyListWithRandomPointer.java)|
 | 137| Single Number II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/SingleNumberII.cc)|
 | 136| Single Number| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/SingleNumber.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/SingleNumber.java)|
-| 135| Candy| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Candy.cc)|
+| 135| Candy| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Candy.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/Candy.java)|
 | 134| Gas Station| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/GasStation.cc)|
 | 133| Clone Graph| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/CloneGraph.cc)|
 | 132| Palindrome Partitioning II| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PalindromePartitioningII.cc)|
@@ -187,7 +187,7 @@
 | 82| Remove Duplicates from Sorted List II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/RemoveDuplicatesFromSortedListII.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/RemoveDuplicatesFromSortedListII.java)|
 | 81| Search in Rotated Sorted Array II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/SearchInRotatedSortedArrayII.cc)|
 | 80| Remove Duplicates from Sorted Array II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/RemoveDuplicatesFromSortedArrayII.cc)|
-| 79| Word Search| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/WordSearch.cc)|
+| 79| Word Search| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/WordSearch.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/WordSearch.java)|
 | 78| Subsets| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Subsets.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/Subsets.java)|
 | 77| Combinations| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Combinations.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/Combinations.java)|
 | 76| Minimum Window Substring| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MinimumWindowSubstring.cc)|
@@ -223,9 +223,9 @@
 | 46| Permutations| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Permutations.cc)|
 | 45| Jump Game II| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/JumpGameII.cc)|
 | 44| Wildcard Matching| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/WildcardMatching.cc)|
-| 43| Multiply Strings| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MultiplyStrings.cc), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/multiply_strings.py)|
+| 43| Multiply Strings| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MultiplyStrings.cc), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/multiply_strings.py), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/MultiplyStrings.java)|
 | 42| Trapping Rain Water| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/TrappingRainWater.cc)|
-| 41| First Missing Positive| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/FirstMissingPositive.cc)|
+| 41| First Missing Positive| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/FirstMissingPositive.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/FirstMissingPositive.java)|
 | 40| Combination Sum II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/CombinationSumII.cc)|
 | 39| Combination Sum| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/CombinationSum.cc)|
 | 38| Count and Say| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/CountAndSay.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/CountAndSay.java)|

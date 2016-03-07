@@ -75,11 +75,33 @@ Make an empty heap. Since t(H) = 0 and m(H) = 0, the amortized cost of *Make-Hea
 {% highlight c++ %}
 template <typename T>
 class FibHeap   {
+private:
     FibNode<T>* min_;
     int size_;
+
+    // helper functions
+    void insert_list_node(FibNode<T>* &li, FibNode<T>* node);
+    void remove_list_node(FibNode<T>* node);
+    void PairwiseCombine();
+    void Link(FibNode<T>* x, FibNode<T>* y);
+    void Cut(FibNode<T>* parent, FibNode<T>* node);
+    void CascadingCut(FibNode<T>* node);
 public:
     FibHeap(): min_(nullptr), size_(0) {  }
+
     int Size() const { return size_; } 
+
+    void Insert(T key);
+
+    FibNode<T> GetMin();
+
+    FibHeap<T> Merge(FibHeap<T> h1, FibHeap<T> h2);
+
+    FibNode<T> ExtractMin();
+
+    void DecreaseKey(FibNode<T>* node, T key);    
+
+    void Delete(FibNode<T>* node);    
 };
 {% endhighlight %}
 
