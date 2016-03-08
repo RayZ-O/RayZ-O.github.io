@@ -82,7 +82,7 @@ Run this test 10 times for non-cached and cached function, the average runtime s
 |Average|2.916s|19.299s|
 {: class="table table-striped table-nonfluid"}
 
- Suprisingly, the cached version is 6x slower than the naive version. Since the input is uniformly distributed in a large range [0, 4294967296). The cache miss rate is very high. The unordered_map spend lots of time allocating small table entries and growing the hashtable but it's almost useless.
+ Suprisingly, the cached version is 6x slower than the naive version. Since the input is uniformly distributed in a large range [0, 4294967296). The cache miss rate is very high. The unordered_map spend lots of time computing hash value, dealing with collision, allocating small table entries but it's almost useless.
 
 Modify the cached version to count the cache hits:
 {% highlight c++ %}
@@ -189,7 +189,7 @@ Runtime:
 |Average|2.916s|19.299s|11.222s|
 {: class="table table-striped table-nonfluid"}
 
-The runtime is still 3x slower than the non-cached version. Since reverse a 32-bit integer is not an expensive operation. The run time of the cached version is dominated by memory allocation for table entries.
+The runtime is still 3x slower than the non-cached version. Since reverse a 32-bit integer is not an expensive operation. The run time of the cached version is dominated by the overhead of hashtable.
 
 The good news is the cahce hits increase dramatically:
 
