@@ -3,5 +3,5 @@ markdown: kramdown
 kramdown:
   input: GFM
   syntax_highlighter: rouge
-permalink: /blog/:categories/:year/:month/:day/:title
+permalink: /blog/:year/:month/:day/:title
 categories: [cpp, java, oop, algorithms, datastructures, multithreading, functionalprogramming, misc]

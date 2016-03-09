@@ -50,10 +50,10 @@ public class Counter {
 }
 {% endhighlight %}
 
-The answer is undefined. It may print the expected count 2000, but most of time it prints a random number less than 2000. Because the *count++;* statement consist of three steps:
-(1) read the value of count
-(2) add 1 to it
-(3) write it back
+The answer is undefined. It may print the expected count 2000, but most of time it prints a random number less than 2000. Because the *count++;* statement consist of three steps:  
+(1) read the value of count  
+(2) add 1 to it  
+(3) write it back  
 The count value of a thread may overwrite the count value of another thread. The minimum possible value of count at the end of the program is 2.
 
 ~~~
@@ -95,7 +95,7 @@ public class Counter {
         count++;
     }
 
-    public void nonstaticIncrement() {
+    public synchronized void nonstaticIncrement() {
         count++;
     }
 
@@ -215,6 +215,6 @@ Exception in thread "Thread-1" java.lang.NullPointerException
 
 [^2]: [The Java™ Tutorials: Synchronization](https://docs.oracle.com/javase/tutorial/essential/concurrency/sync.html)
 
-[^3]: [Java Synchronization Tutorial: What, How and Why?](http://javarevisited.blogspot.com/2011/04/synchronization-in-java-synchronized.html)
+[^3]: [Java Synchronization Tutorial: What, How and Why](http://javarevisited.blogspot.com/2011/04/synchronization-in-java-synchronized.html)
 
 

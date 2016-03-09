@@ -6,7 +6,7 @@ date: 2015-05-18
 author: Rui Zhang
 ---
 
-A prime number is a natural number that has exactly two distinct natural number divisors: 1 and itself. Finding all prime numbers in a given range is an ancient problem in number theory. A naive alogrithm would be for each number *N* in the range, check whether *N* is divisible by one of the numbers from 2 to sqrt(*N*). Following C++ code implements this alogrithm:
+A prime number is a natural number that has exactly two distinct natural number divisors: 1 and itself. Finding all prime numbers in a given range is an ancient problem in number theory. A naive alogrithm would be for each number N in the range, check whether N is divisible by one of the numbers from 2 to sqrt(N). Following C++ code implements this alogrithm:
 {% highlight c++ %}
 std::vector<int> generatePrimes(int n) {
     std::vector<int> primes;
@@ -25,7 +25,7 @@ std::vector<int> generatePrimes(int n) {
     return primes;
 }
 {% endhighlight %}
-The time complexity of this algorithm is equal to sqrt(2) + sqrt(3) + ... + sqrt(N), according to the formula in [On the sum of the square roots of the first n natural numbers](http://ramanujan.sirinudi.org/Volumes/published/ram09.pdf), T(*N*) = O(*N*sqrt(*N*)). Is there a better solution?
+The time complexity of this algorithm is equal to sqrt(2) + sqrt(3) + ... + sqrt(N), according to the formula in [On the sum of the square roots of the first n natural numbers](http://ramanujan.sirinudi.org/Volumes/published/ram09.pdf), T(N) = O(Nsqrt(N)). Is there a better solution?
 
 ### Prime sieve
 A prime sieve is a fast type of algorithm for finding primes. The idea of prime sieve is to remvoe the composite numbers from the range until only prime numbers are left. There are many prime sieve algorihms. I'll explain a simple and ancient one called sieve of Eratosthenes which is named after Greek mathematician Eratosthenes of Cyrene.  
@@ -58,7 +58,7 @@ std::vector<int> generatePrimes(int n) {
 }
 {% endhighlight %}
 
-There are two improvements for sieve of Eratosthenes, firstly in step 2 we can start from p * p since all smaller multiples of p have already been marked in previous loops, and we can stop when p * p is greater than *N*. Secondly we can only check odd numbers and odd multiples, as all even numbers greater than 2 are not primes.
+There are two improvements for sieve of Eratosthenes, firstly in step 2 we can start from p * p since all smaller multiples of p have already been marked in previous loops, and we can stop when p * p is greater than N. Secondly we can only check odd numbers and odd multiples, as all even numbers greater than 2 are not primes.
 After refinement:
 
 {% highlight c++ %}
@@ -85,7 +85,7 @@ std::vector<int> generatePrimes(int n) {
 }
 {% endhighlight %}
 
-The loop of the algorithm totally execute (*N*/2) * (1/3 + 1/5 + 1/7 + ... + 1/p) times. This sequence is [Harmonic Series of Primes](http://mathworld.wolfram.com/HarmonicSeriesofPrimes.html), which is bounded by log(log(*N*)). Thus the complexity of Sieve of Eratosthenes is O(*N*log(log(*N*))). Much better than the naive algorithm!
+The loop of the algorithm totally execute (N/2) * (1/3 + 1/5 + 1/7 + ... + 1/p) times. This sequence is [Harmonic Series of Primes](http://mathworld.wolfram.com/HarmonicSeriesofPrimes.html), which is bounded by log(log(N)). Thus the complexity of Sieve of Eratosthenes is O(Nlog(log(N))). Much better than the naive algorithm!
 
 #### Run time 
 *Tested on Ubuntu 14.04 machine with 8 cores 32G memory*  
