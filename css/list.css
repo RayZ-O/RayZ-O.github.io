@@ -5,7 +5,7 @@
 .list a {
   font: 1.5em Open Sans, Helvetica Neue, Helvetica, Arial,sans-serif;
   font-weight: bold;
-  border-bottom: 1px solid #ccc;
+  /*border-bottom: 1px solid #ccc;*/
 }
 
 /*.list li a:hover {

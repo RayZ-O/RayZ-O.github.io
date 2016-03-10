@@ -1,3 +1,32 @@
+.aboutme {
+  font-size: 1.2em;
+  font-family: Helvetica Neue, Helvetica, Arial,sans-serif;
+  padding-top: 25px;
+}
+
+.name { 
+  padding-top: 25px;
+  font-family: Helvetica Neue, Helvetica, Arial,sans-serif;
+}
+
+#jumbo {
+  padding-top: 15px;
+}
+
+.footer {  
+  padding-top: 40px;
+}
+
+.logo-small {
+    color: #87CEFA;
+    font-size: 40px;
+}
+
+.logo {
+    color: #f4511e;
+    font-size: 200px;
+}
+
 .posts a {
   font-size: 1.5em;
   font-weight: bold;
