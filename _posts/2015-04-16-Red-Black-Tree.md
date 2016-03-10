@@ -31,7 +31,7 @@ The property above guarantees the height of a red-black tree is at most 2log(n+1
 [1]. without extra pointer
 
 ### Node Structure
-A red-black tree node stores one extra field color for balancing.
+A red-black tree node stores one extra field color for balancing. 
 {% highlight c++ %}
 enum class Color {RED, BLACK};
 
@@ -51,11 +51,26 @@ struct RBTreeNode {
     }
 };
 
+<!-- An extra sentinel Nil is used instead of nullptr to simplify the implementation. -->
+
 template <typename T, typename U>
 class RBTree {
 private:
     RBTreeNode<T, U> *root_;
     int size_;
+
+    RBTreeNode<T, U>* GetUncle(RBTreeNode<T, U> *x);
+
+    void LeftRotation(RBTreeNode<T, U> *x);
+
+    void RightRotation(RBTreeNode<T, U> *x);
+
+    void RBInsertFixup(RBTreeNode<T, U> *x);
+
+    void RBDelete(RBTreeNode<T, U> *z);
+
+    void RBDeleteFixup(RBTreeNode<T, U> *x);
+
 public:
     RBTree() : root_(nullptr), size_(0) { }
 
@@ -65,15 +80,14 @@ public:
 
     RBTreeNode<T, U>* Search(T key);
 
-    void Insert(T key, U value);
+    void RBInsert(T key, U value);  
 
-    void Delete(T key);
+    void RBDelete(T key);
 
-    RBTreeNode<T, U>* Successor(RBTreeNode<T, U> *z); 
-    
-    RBTreeNode<T, U>* Predecessor(RBTreeNode<T, U> *z);   
+    RBTreeNode<T, U>* Successor(RBTreeNode<T, U> *z);
+
+    RBTreeNode<T, U>* Predecessor(RBTreeNode<T, U> *z);
 };
-
 {% endhighlight %}
 
 ### Search, Successor, Predecessor
@@ -96,14 +110,14 @@ RBTreeNode<T, U>* RBTree<T, U>::Search(T key) {
 
 template <typename T, typename U>
 RBTreeNode<T, U>* Successor(RBTreeNode<T, U> *z) {
-    RBTreeNode<T, U> *x = z.right;
+    RBTreeNode<T, U> *x = z->right;
     if (x) {
         while (x->left) {
             x = x->left;
         }
         return x;
     } else {
-        RBTreeNode<T, U> *y = z.parent;
+        RBTreeNode<T, U> *y = z->parent;
         while (y && z == y->right) {
             z = y;
             y = y->parent;
@@ -114,14 +128,14 @@ RBTreeNode<T, U>* Successor(RBTreeNode<T, U> *z) {
 
 template <typename T, typename U>
 RBTreeNode<T, U>* Predecessor(RBTreeNode<T, U> *z) {
-    RBTreeNode<T, U> *x = z.left;
+    RBTreeNode<T, U> *x = z->left;
     if (x) {
         while (x->right) {
             x = x->right;
         }
         return x;
     } else {
-        RBTreeNode<T, U> *y = z.parent;
+        RBTreeNode<T, U> *y = z->parent;
         while (y && z == y->left) {
             z = y;
             y = y->parent;
@@ -133,12 +147,12 @@ RBTreeNode<T, U>* Predecessor(RBTreeNode<T, U> *z) {
 {% endhighlight %}
 
 ### Insertion[^3]
-The newly inserted node is always set to red. Similar to other self-balancing trees, to guarantee the red-black tree properties are preserved, auxiliary fix-up is needed after insertion and deletion. There are two kind of fix-up for red-black tree: **Recoloring** and **Rotation**.
+The newly inserted node is always set to red. Similar to other self-balancing trees, to guarantee the red-black tree properties are preserved, auxiliary fix-up is needed after insertion and deletion. There are two kinds of fix-up for red-black tree: **Recoloring** and **Rotation**.
 
 {% highlight c++ %}
 template <typename T, typename U>
 void RBTree<T, U>::RBInsert(T key, U value) {
-    RBTreeNode<T, U> *y = null;
+    RBTreeNode<T, U> *y = nullptr;
     RBTreeNode<T, U> *x = root_;
     while (x) {
         y = x;
@@ -156,14 +170,14 @@ void RBTree<T, U>::RBInsert(T key, U value) {
     if (!y) {
         root_ = z;
     } else if (key < y->key) {
-        y.left = z;
+        y->left = z;
     } else {
-        y.right = z;
+        y->right = z;
     }
-    InsertFixup(z);
+    RBInsertFixup(z);
 }
 {% endhighlight %}
-There are 6 cases in Insert-Fixup differ in uncle color or subtree structure.
+There are 6 cases in red-black tree insertion fix-up differ in uncle color or subtree structure.
 
 Denote the newly inserted node as *x*.
 
@@ -214,8 +228,8 @@ if (u && u->color == Color::RED) {
 **Case 3**: x's uncle is Black, parent is left child of grandparent and x is left child of parent(LL).  
 ![fig4]  
 **Fix-up**:  
-(1) Swap color of g and p  
-(2) Right rotation g 
+(1) swap color of g and p  
+(2) right rotation on g 
 
 ![fig5]  
 
@@ -233,8 +247,8 @@ if ((!u || u->color == Color::BLACK) && x == p->left && p == g->left) {
 **Case 4**: x's uncle is Black, parent is left child of grandparent and x is right child of parent(LR).  
 ![fig6]  
 **Fix-up**:  
-(1) Left rotation p  
-(2) Become LL case  
+(1) left rotation on p  
+(2) converted to LL case  
 
 ![fig7]  
 
@@ -252,8 +266,8 @@ if ((!u || u->color == Color::BLACK) && x == p->right && p == g->left) {
 **Case 5**: x's uncle is Black, parent is right child of grandparent and x is right child of parent(RR).  
 ![fig8]  
 **Fix-up**:  
-(1) Swap color of g and p  
-(2) Left rotation g  
+(1) swap color of g and p  
+(2) left rotation on g  
 
 ![fig9]  
 
@@ -270,8 +284,8 @@ if ((!u || u->color == Color::BLACK) && x == p->right && p == g->right) {
 **Case 6**: x's uncle is Black, parent is right child of grandparent and x is left child of parent(RL).  
 ![fig10]  
 **Fix-up**:  
-(1) Right rotation p  
-(2) Become RR case  
+(1) right rotation on p  
+(2) converted to RR case  
 
 ![fig11]  
 
@@ -291,7 +305,7 @@ if ((!u || u->color == Color::BLACK) && x == p->left && p == g->right) {
 {% highlight c++ %}
 template <typename T, typename U>
 void RBTree<T, U>::RBInsertFixup(RBTreeNode<T, U> *x) {
-    while (x->parent && x->parent->color == Color::RED) { // x is red at the beginning of each iteration
+    while (x != root_ && x->parent->color == Color::RED) { // x is red at the beginning of each iteration
         RBTreeNode<T, U>* u = GetUncle(x);
         RBTreeNode<T, U>* p = x->parent;
         RBTreeNode<T, U>* g = p->parent;   // g can't be NULL since x->parent->color == Color::RED
@@ -343,7 +357,7 @@ There are 3 cases when deleting a node x in standard binary search tree.[^2] Let
 
 The function below delete node z in binary search tree.
 {% highlight c++ %}
-void Delete(TreeNode *z) {
+void BSTDelete(TreeNode *z) {
     if (!z->left) {
         Transplant(z, z->right);
     } else if (!z->right) {
@@ -382,6 +396,159 @@ void Transplant(TreeNode *u, TreeNode *v) {
 <br>
 The **RBDelete** function add additional code to keep track with the node which may cause red-black property violation.
 
+{% highlight c++ %}
+template <typename T, typename U>
+void RBTree<T, U>::RBDelete(RBTreeNode<T, U> *z) {
+    RBTreeNode<T, U> *x = nullptr;
+    RBTreeNode<T, U> *y = z;
+    Color y_original_color = y->color;
+    if (!z->left) {
+        x = z->right;
+        Transplant(z, z->right);
+    } else if (!z->right) {
+        x = z->left;
+        Transplant(z, z->left);
+    } else {
+        y = z->right;
+        while (y->left) {
+            y = y->left;
+        }
+        y_original_color = y->color;
+        x = y->right;
+        if (y->parent == z) {
+            x->parent = y;
+        } else {
+            Transplant(y, y->right);
+            y->right = z->right;
+            y->right->parent = y;
+        }
+        Transplant(z, y);
+        y->left = z->left;
+        y->left->parent = y;
+        y->color = z->color;
+    }
+    delete z;
+    if (y_original_color == Color::BLACK) {
+        RBDeleteFixup(x);
+    }
+}
+
+template <typename T, typename U>
+void RBTree<T, U>::RBDelete(T key) {
+    RBDelete(Search(key));
+}
+{% endhighlight %}
+There are 8 cases in red-black tree deletion fix-up. The first four and the last four are symmetric.
+
+**Case 1**: x's sibling w is red.
+
+![fig16]  
+**Fix-up**:  
+(1) switch color of w and p  
+(2) left rotation on p
+(3) now x's sibling is a black node, case 1 is converted to case 2, 3 or 4
+
+-------------------------------------------------------
+
+**Case 2**: x's sibling w is black, and both of w's children are black.  
+
+![fig17]  
+**Fix-up**:  
+(1) set color of w to red    
+(2) left rotation on p  
+(3) reassign p to x, and continue fix-up on new x
+
+-------------------------------------------------------
+
+**Case 3**: x's sibling w is black, w's left child is red, w's right child is black
+![fig18]  
+**Fix-up**:  
+(1) switch color of w and w's left child  
+(2) right rotation w  
+(3) now sibling of x has a red right child, case 3 is converted to case 4
+
+-------------------------------------------------------
+
+**Case 4**: x's sibling w is black, and w's right child is red
+
+(1)  w's left child is black  
+![fig19]  
+
+(2)  w's left child is red  
+![fig20]  
+
+**Fix-up**:  
+ (1) switch color of p and w  
+ (2) set w's right child to red  
+ (3) left rotation on p
+
+-------------------------------------------------------
+
+**Case 5-8** are symmetric, same as Case 1-4 with "right" and "left" exchanged 
+
+-------------------------------------------------------
+
+**Implementation**:  
+
+{% highlight c++ %}
+template <typename T, typename U>
+void RBTree<T, U>::RBDeleteFixup(RBTreeNode<T, U> *x) {
+    while (x != root_ && x->color == Color::BLACK) {
+        RBTreeNode<T, U> *p = x->parent;
+        if (x == p->left) {
+            RBTreeNode<T, U> *w = p->right;
+            if (w->color == Color::RED) {            
+                w->color = Color::BLACK;
+                p->color = Color::RED;
+                LeftRotation(p);
+                w = p->right;
+            }
+            if (w->left->color == Color::BLACK && w->right->color == Color::BLACK) {
+                w->color = Color::RED;
+                x = p;
+            } else {
+                if (w->right->color == Color::BLACK) {
+                    w->left->color = Color::BLACK;
+                    w->color = Color::RED;
+                    RightRotation(w);
+                    w = p->right;
+                } 
+                w->color = p->color;
+                p->color = Color::BLACK;
+                w->right->color = Color::BLACK;
+                LeftRotation(p);
+                x = root_;
+            }
+        } else {
+            RBTreeNode<T, U> *w = p->left;
+            if (w->color == Color::RED) {
+                w->color = Color::BLACK;
+                p->color = Color::RED;
+                RightRotation(p);
+                w = p->left;
+            }
+            if (w->left->color == Color::BLACK && w->right->color == Color::BLACK) {
+                w->color = Color::RED;
+                x = p;
+            } else {
+                if (w->left->color == Color::BLACK) {
+                    w->right->color = Color::BLACK;
+                    w->color = Color::RED;
+                    LeftRotation(w);
+                    w = p->left;
+                } 
+                w->color = p->color;
+                p->color = Color::BLACK;
+                w->left->color = Color::BLACK;
+                RightRotation(p);
+                x = root_;
+            }
+        }
+    }
+    x->color = Color::BLACK;
+}
+{% endhighlight %}
+
 **Reference:**
 
 [^1]: [Wikipedia: Self-balancing binary search tree ](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree)
@@ -419,3 +586,13 @@ The **RBDelete** function add additional code to keep track with the node which 
 [fig14]: /assets/RBTree/fig14.png
 
 [fig15]: /assets/RBTree/fig15.png
+
+[fig16]: /assets/RBTree/fig16.png
+
+[fig17]: /assets/RBTree/fig17.png
+
+[fig18]: /assets/RBTree/fig18.png
+
+[fig19]: /assets/RBTree/fig19.png
+
+[fig20]: /assets/RBTree/fig20.png

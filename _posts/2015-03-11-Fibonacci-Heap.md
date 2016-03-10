@@ -17,17 +17,17 @@ Fibonacci heap is invented by Michael L. Fredman and Robert E. Tarjan in 1984. I
 
 |Operation|Binary heap(worst-case)|Fibonacci Heap(amortized)|
 |:---|:---:|:---:|
-|*Make-Heap*<sup>1</sup>|O(1)   |O(1)|
+|*Make-Heap*<sup>[1]</sup>|O(1)   |O(1)|
 |*Insert*      |O(lg N)|O(1)|
 |*Get-Min*     |O(1)   |O(1)|
 |*Extract-Min* |O(lg N)|O(lg N)|
 |*Merge*       |O(n)   |O(1)|
-|*Decrease-Key*<sup>2</sup>|O(lg N)|O(1)|
-|*Delete*<sup>2</sup>  |O(lg N)|O(lg N)|
+|*Decrease-Key*<sup>[2]</sup>|O(lg N)|O(1)|
+|*Delete*<sup>[2]</sup>  |O(lg N)|O(lg N)|
 {: class="table table-striped table-nonfluid"}
 
-1. creates a new empty heap.  
-2. require a pointer to the target node as input because search is expensise in both binary heap and fibonacci heap.
+[1]. creates a new empty heap.  
+[2]. require a pointer to the target node as input because search is expensise in both binary heap and fibonacci heap.
  
 From a theoretical perspective, all operations of Fibonacci heap are at least as fast as binary heap, thus fibonacci heap is obviously better than binary heap. However, because of the constant factor and implementation complexity, it's only attractive when the input size is large[^1].
 
@@ -49,6 +49,13 @@ struct FibNode {
     FibNode *rsibling;
     FibNode(T d) : key(d), degree(0), childCut(false), parent(nullptr), 
                    child(nullptr), lsibling(this), rsibling(this) {}
+    ~FibNode() {
+        delete child;
+        child = nullptr;
+        lsibling->rsibling = nullptr;
+        delete rsibling;
+        rsibling = nullptr;        
+    }    
 };
 {% endhighlight %}
 
@@ -76,20 +83,22 @@ Make an empty heap. Since t(H) = 0 and m(H) = 0, the amortized cost of *Make-Hea
 template <typename T>
 class FibHeap   {
 private:
-    FibNode<T>* min_;
+    FibNode<T> *min_;
     int size_;
 
     // helper functions
-    void insert_list_node(FibNode<T>* &li, FibNode<T>* node);
-    void remove_list_node(FibNode<T>* node);
+    void insert_list_node(FibNode<T> *&li, FibNode<T> *node);
+    void remove_list_node(FibNode<T> *node);
     void PairwiseCombine();
-    void Link(FibNode<T>* x, FibNode<T>* y);
-    void Cut(FibNode<T>* parent, FibNode<T>* node);
-    void CascadingCut(FibNode<T>* node);
+    void Link(FibNode<T> *x, FibNode<T> *y);
+    void Cut(FibNode<T> *parent, FibNode<T> *node);
+    void CascadingCut(FibNode<T> *node);
 public:
-    FibHeap(): min_(nullptr), size_(0) {  }
+    FibHeap(): min_(nullptr), size_(0) { }
 
-    int Size() const { return size_; } 
+    ~FibHeap() { delete min_; }
+
+    int size() const { return size_; } 
 
     void Insert(T key);
 
@@ -99,9 +108,9 @@ public:
 
     FibNode<T> ExtractMin();
 
-    void DecreaseKey(FibNode<T>* node, T key);    
+    void DecreaseKey(FibNode<T> *node, T key);    
 
-    void Delete(FibNode<T>* node);    
+    void Delete(FibNode<T> *node);    
 };
 {% endhighlight %}
 
@@ -127,7 +136,7 @@ void FibHeap<T>::Insert(T key) {
 }
 
 template <typename T> // helper function to insert a node into doubly linked list
-void FibHeap<T>::insert_list_node(FibNode<T>* &li, FibNode<T>* node) { 
+void FibHeap<T>::insert_list_node(FibNode<T> *&li, FibNode<T> *node) { 
     if (!li) {
         li = node;
     } else {
@@ -156,9 +165,9 @@ Therefore the amortized cost is equal to the actual cost O(1).
 {% highlight c++ %}
 template <typename T>
 FibHeap<T> FibHeap<T>::Merge(FibHeap<T> h1, FibHeap<T> h2) {
-    if (h1.Size() == 0) {
+    if (h1.size() == 0) {
         reutrn h2;
-    } else if (h2.Size() == 0) {
+    } else if (h2.size() == 0) {
         reutrn h1;
     } else { // merge linked lists
         h1->min_->lsibling->rsibling = h2->min_->lsibling;
@@ -198,7 +207,7 @@ Since in *Extract-Min*, the constant factor in O(t(H)) is 1.
 {% highlight c++ %}
 template <typename T>
 FibNode<T> FibHeap<T>::ExtractMin() {
-    FibNode<T>* z = min_;
+    FibNode<T> *z = min_;
     if (!z) {
         if (z->child) {
             FibNode<T> *c = z->child;
@@ -219,7 +228,7 @@ FibNode<T> FibHeap<T>::ExtractMin() {
 }
 
 template <typename T> // helper function to delete a node into doubly linked list
-void FibHeap<T>::remove_list_node(FibNode<T>* node) { 
+void FibHeap<T>::remove_list_node(FibNode<T> *node) { 
     node->rsibling->lsibling = node->lsibling;
     node->lsibling->rsibling = node->rsibling;
 }
@@ -227,12 +236,12 @@ void FibHeap<T>::remove_list_node(FibNode<T>* node) {
 template <typename T>
 void FibHeap<T>::PairwiseCombine() {
     std::vector<FibNode<T>*> roots(log2(size_)+1, nullptr);
-    FibNode<T>* x = min_;
+    FibNode<T> *x = min_;
     do {
-        FibNode<T>* next = x->rsibling;
+        FibNode<T> *next = x->rsibling;
         int d = x->degree;
         while (roots[d]) {
-            FibNode<T>* y = roots[d];
+            FibNode<T> *y = roots[d];
             if (x->key > y->key) {
                 std::swap(x, y);
             }
@@ -260,7 +269,7 @@ void FibHeap<T>::PairwiseCombine() {
 }
 
 template <typename T>
-void FibHeap<T>::Link(FibNode<T>* x, FibNode<T>* y) {
+void FibHeap<T>::Link(FibNode<T> *x, FibNode<T> *y) {
     remove_list_node(y);
     insert_list_node(x->child, y);
     x->degree++;
@@ -291,12 +300,12 @@ Thus, the amortized cost of *Decrease-Key* is O(c) + 4 - c = O(1).
 
 {% highlight c++ %}
 template <typename T>
-void FibHeap<T>::DecreaseKey(FibNode<T>* node, T key) {
+void FibHeap<T>::DecreaseKey(FibNode<T> *node, T key) {
     if (key > node->key) {
         return;
     }
     node->key = key;
-    FibNode<T>* p = node->parent;
+    FibNode<T> *p = node->parent;
     if (p && node->key < p->key) {
         Cut(p, node);
         CascadingCut(p); // cascading cut from parent to root
@@ -307,7 +316,7 @@ void FibHeap<T>::DecreaseKey(FibNode<T>* node, T key) {
 }
 
 template <typename T>
-void FibHeap<T>::Cut(FibNode<T>* parent, FibNode<T>* node) {
+void FibHeap<T>::Cut(FibNode<T> *parent, FibNode<T> *node) {
     remove_list_node(node);
     parent->degree--;
     insert_list_node(min_, node);
@@ -315,8 +324,8 @@ void FibHeap<T>::Cut(FibNode<T>* parent, FibNode<T>* node) {
 }
 
 template <typename T>
-void FibHeap<T>::CascadingCut(FibNode<T>* node) {
-    FibNode<T>* p = node->parent;
+void FibHeap<T>::CascadingCut(FibNode<T> *node) {
+    FibNode<T> *p = node->parent;
     if (p) {
         if (!node->childCut) { 
             node->childCut = true;
@@ -332,7 +341,7 @@ void FibHeap<T>::CascadingCut(FibNode<T>* node) {
 *Decrease-Key* and *Extract-Min* can be used to implement *Delete*.
 {% highlight c++ %}
 template <typename T>
-void FibHeap<T>::Delete(FibNode<T>* node) {
+void FibHeap<T>::Delete(FibNode<T> *node) {
     DecreaseKey(node, min_->key);
     ExtractMin();
 }
