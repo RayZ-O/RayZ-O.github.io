@@ -264,7 +264,7 @@ Therefore, the total number of decrease is at most n - 1, the KMP algorithm runs
 
 [^3]: [Topcoder: Introduction to String Searching Algorithms](https://www.topcoder.com/community/data-science/data-science-tutorials/introduction-to-string-searching-algorithms/)
 
-[^4]: [Finite State Automata](http://galaxy.eti.pg.gda.pl/katedry/kiw/pracownicy/Jan.Daciuk/personal/thesis/node12.html)
+[^4]: [Finite State Automata, Jan Daciuk](http://galaxy.eti.pg.gda.pl/katedry/kiw/pracownicy/Jan.Daciuk/personal/thesis/node12.html)
 
 [^5]: [Wikipedia: Finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine)
 

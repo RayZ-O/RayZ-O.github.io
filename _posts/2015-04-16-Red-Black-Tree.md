@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "Self Balancing Binary Search Tree(2) - Red-Black Tree"
+title: "Self Balancing Binary Search Tree 2 - Red-Black Tree"
 categories: [all, datastructures]
 date: 2015-04-16
 author: Rui Zhang
 ---
 
-The red-black tree is invented by Rudolf Bayer in 1972. It's one of the most famous self-balancing binary search tree. TreeMap/TreeSet in Java and std::map/std::set in C++ STL use red-black tree as underlying data structure. Other popular self-balancing search trees include 2-3 tree, AA tree, AVL tree, Splay tree and Treap[^1].
+The red-black tree is invented by Rudolf Bayer in 1972. It's one of the most popular self-balancing binary search tree. TreeMap/TreeSet in Java and std::map/std::set in C++ STL use red-black tree as underlying data structure.
 
 ### Property
-Red-Black tree has 5 properties[^2].   
+Red-Black tree has 5 properties[^1].   
 1. Every node is either red or black  
 2. The root is black  
 3. Every leaf is black  
@@ -161,7 +161,7 @@ RBTreeNode<T, U>* RBTree<T, U>::Predecessor(RBTreeNode<T, U> *z) {
 }
 {% endhighlight %}
 
-### Insertion[^3]
+### Insertion[^2]
 The newly inserted node is always set to red. Similar to other self-balancing trees, to guarantee the red-black tree properties are preserved, auxiliary fix-up is needed after insertion and deletion. There are two kinds of fix-up for red-black tree: **Recoloring** and **Rotation**.
 
 Rotation is discussed in details in the previous post [Self Balancing Binary Search Tree(1) - AVL Tree](http://rayz-o.github.io/blog/2015/04/01/AVL-Tree).  
@@ -398,71 +398,8 @@ void RBTree<T, U>::RBInsertFixup(RBTreeNode<T, U> *x) {
 ### Deletion
 Deletion is more complex than Insertion. It consists of a modified binary search tree deletion and a red-black property violation fix-up.
 
-There are 3 cases when deleting a node x in standard binary search tree.[^2] Let p = x->parent. 
+The standard binary search tree deletion is explained in details in the previous post [Self Balancing Binary Search Tree(1) - AVL Tree](http://rayz-o.github.io/blog/2015/04/01/AVL-Tree). 
 
-(1) x has not child, modify p to replace x with NULL.
-
-![fig12]
-
--------------------------------------------------------
-
-(2) x has one child, find a suitable child y in subtree rooted at x and modify p to replace x with y.
-
-![fig13]
-
--------------------------------------------------------
-
-(3) x has two child, find x's successor y and replace x with s.
-
-* if y is x's right child, replace x with y directly
-
-![fig14]
-
-* if y is not x's right child, replace y with it's own right child, then replace x with y.
-
-![fig15]
-
--------------------------------------------------------
-
-The function below delete node z in binary search tree.
-{% highlight c++ %}
-void BSTDelete(TreeNode *z) {
-    if (!z->left) {
-        Transplant(z, z->right);
-    } else if (!z->right) {
-        Transplant(z, z->left);
-    } else {
-        y = z->right;
-        while (y->left) {
-            y = y->left;
-        }
-        if (y->parent != z) {
-            Transplant(y, y->right);
-            y->right = z->right;
-            y->right->parent = y;
-        }
-        Transplant(z, y);
-        y->left = z->left;
-        y->left->parent = y;
-    }
-}
-
-// replace the subtree root at u with subtree rooted at v
-void Transplant(TreeNode *u, TreeNode *v) {
-    TreeNode *p = u->parent;
-    if (!p) {
-        root_ = v;
-    } else if (u == p->left) {
-        p->left = v;
-    } else {
-        p->right = v;
-    }
-    if (!v) {
-        v->parent = p;
-    }
-}
-{% endhighlight %}
-<br>
 The **RBDelete** function adds additional code to keep track with the node which may cause red-black property violation.
 
 {% highlight c++ %}
@@ -661,11 +598,9 @@ void RBTree<T, U>::Cleanup(RBTreeNode<T, U> *x) {
 <br>
 **Reference:**
 
-[^1]: [Wikipedia: Self-balancing binary search tree ](https://en.wikipedia.org/wiki/Self-balancing_binary_search_tree)
+[^1]: [Introduction to Algorithms, 3rd Edition ](http://www.amazon.com/Introduction-Algorithms-Edition-Thomas-Cormen/dp/0262033844)
 
-[^2]: [Introduction to Algorithms, 3rd Edition ](http://www.amazon.com/Introduction-Algorithms-Edition-Thomas-Cormen/dp/0262033844)
-
-[^3]: [Geeksforgeeks: Red-Black Tree Set 2 (Insert)](http://www.geeksforgeeks.org/red-black-tree-set-2-insert)
+[^2]: [Geeksforgeeks: Red-Black Tree Set 2 (Insert)](http://www.geeksforgeeks.org/red-black-tree-set-2-insert)
 
 [fig1]: /assets/RBTree/fig1.png
 
@@ -688,14 +623,6 @@ void RBTree<T, U>::Cleanup(RBTreeNode<T, U> *x) {
 [fig10]: /assets/RBTree/fig10.png
 
 [fig11]: /assets/RBTree/fig11.png
-
-[fig12]: /assets/RBTree/fig12.png
-
-[fig13]: /assets/RBTree/fig13.png
-
-[fig14]: /assets/RBTree/fig14.png
-
-[fig15]: /assets/RBTree/fig15.png
 
 [fig16]: /assets/RBTree/fig16.png
 
