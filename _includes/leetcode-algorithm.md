@@ -2,6 +2,7 @@
 
 | # |Title |Difficulty| Code |
 |--- |:------|----------|:------|
+| 336| Palindrome Pairs |Hard||
 | 335| Self Crossing |Medium||
 | 334| Increasing Triplet Subsequence|Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/IncreasingTripletSubsequence.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/IncreasingTripletSubsequence.java)|
 | 332| Reconstruct Itinerary| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C%2B%2B/ReconstructItinerary.cc)|
@@ -83,7 +84,7 @@
 | 211| Add and Search Word - Data structure design| Medium| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/AddAndSearchWord.cc) |
 | 210| Course Schedule II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/CourseScheduleII.cc)|
 | 209| Minimum Size Subarray Sum| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MinimumSizeSubarraySum.cc)|
-| 208| Implement Trie (Prefix Tree)| Medium| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ImplementTrie.cc) |
+| 208| Implement Trie (Prefix Tree)| Medium| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ImplementTrie.cc) , [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ImplementTrie.java)|
 | 207| Course Schedule| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/CourseSchedule.cc)|
 | 206| Reverse Linked List| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ReverseList.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ReverseLinkedList.java), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/reverse_linked_list.py)|
 | 205| Isomorphic Strings| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/IsomorphicStrings.cpp), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/IsomorphicStrings.java)|
@@ -120,7 +121,7 @@
 | 149| Max Points on a Line| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MaxPointsOnALine.cc)|
 | 148| Sort List| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/SortList.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/SortList.java)|
 | 147| Insertion Sort List| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/InsertionSortList.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/InsertionSortList.java)|
-| 146| LRU Cache| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/LRUCache.cc)|
+| 146| LRU Cache| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/LRUCache.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/LRUCache.java)|
 | 145| Binary Tree Postorder Traversal| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/BinaryTreePostorderTraversal.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/BinaryTreePostorderTraversal.java)|
 | 144| Binary Tree Preorder Traversal| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/BinaryTreePreorderTraversal.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/BinaryTreePreorderTraversal.java)|
 | 143| Reorder List| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ReorderList.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ReorderList.java)|
@@ -258,7 +259,7 @@
 | 11| Container With Most Water| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ContainerWithMostWater.cc)|
 | 10| Regular Expression Matching| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/RegularExpressionMatching.cc)|
 | 9| Palindrome Number| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PalindromeNumber.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/PalindromeNumber.java), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/palindrome_number.py)|
-| 8| String to Integer (atoi)| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/StringToInteger.cc) |
+| 8| String to Integer (atoi)| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/StringToInteger.cc) , [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/StringToInteger.java)|
 | 7| Reverse Integer| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ReverseInteger.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ReverseInteger.java), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/reverse_integer.py)|
 | 6| ZigZag Conversion| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ZigZagConversion.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ZigZagConversion.java)|
 | 5| Longest Palindromic Substring| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/LongestPalindromicSubstring.cc)|
