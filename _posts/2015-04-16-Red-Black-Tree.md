@@ -230,13 +230,12 @@ void RBTree<T, U>::RBInsert(T key, U value) {
     z->parent = y;
     if (y == Nil) {
         root_ = z;
-    }
-    else if (key < y->key) {
+    } else if (key < y->key) {
         y->left = z;
-    }
-    else {
+    } else {
         y->right = z;
     }
+    size_++;
     RBInsertFixup(z);
 }
 {% endhighlight %}
@@ -417,6 +416,15 @@ void RBTree<T, U>::RBTransplant(RBTreeNode<T, U> *u, RBTreeNode<T, U> *v) {
 }
 
 template <typename T, typename U>
+void RBTree<T, U>::RBDelete(T key) {
+    RBTreeNode<T, U> *x = Search(key);
+    if (x) {
+        RBDelete(x);
+        size_--;
+    }
+}
+
+template <typename T, typename U>
 void RBTree<T, U>::RBDelete(RBTreeNode<T, U> *z) {
     RBTreeNode<T, U> *x = Nil;
     RBTreeNode<T, U> *y = z;
@@ -437,8 +445,7 @@ void RBTree<T, U>::RBDelete(RBTreeNode<T, U> *z) {
         x = y->right;
         if (y->parent == z) {
             x->parent = y;
-        }
-        else {
+        } else {
             RBTransplant(y, y->right);
             y->right = z->right;
             y->right->parent = y;
@@ -456,13 +463,6 @@ void RBTree<T, U>::RBDelete(RBTreeNode<T, U> *z) {
     if (y_original_color == Color::BLACK) {
         RBDeleteFixup(x);
     }
-}
-
-template <typename T, typename U>
-void RBTree<T, U>::RBDelete(T key) {
-    RBTreeNode<T, U> *x = Search(key);
-    if (x)
-        RBDelete(x);
 }
 {% endhighlight %}
 There are 8 cases in red-black tree deletion fix-up. The first four and the last four are symmetric.
@@ -581,7 +581,7 @@ void RBTree<T, U>::RBDeleteFixup(RBTreeNode<T, U> *x) {
 {% endhighlight %}
 <br>
 
-#### **Cleanup:**  
+### **Cleanup:**  
 The cleanup function recursively releases allocated nodes.
 {% highlight c++ %}
 template <typename T, typename U>
