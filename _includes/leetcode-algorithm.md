@@ -2,7 +2,7 @@
 
 | # |Title |Difficulty| Code |
 |--- |:------|----------|:------|
-| 337| House Robber III |Medium||
+| 337| House Robber III |Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C%2B%2B/HouseRobberIII.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/HouseRobberIII.java)|
 | 336| Palindrome Pairs |Hard||
 | 335| Self Crossing |Medium||
 | 334| Increasing Triplet Subsequence|Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/IncreasingTripletSubsequence.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/IncreasingTripletSubsequence.java)|
@@ -148,7 +148,7 @@
 | 123| Best Time to Buy and Sell Stock III| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/BestTimeToBuyAndSellStockIII.cc)|
 | 122| Best Time to Buy and Sell Stock II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/BestTimeToBuyAndSellStockII.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/BestTimeToBuyAndSellStockII.java)|
 | 121| Best Time to Buy and Sell Stock| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/BestTimeToBuyAndSellStock.cc)|
-| 120| Triangle| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Triangle.cc)|
+| 120| Triangle| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Triangle.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/Triangle.java)|
 | 119| Pascal's Triangle II| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PascalTriangleII.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/PascalsTriangleII.java)|
 | 118| Pascal's Triangle| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PascalTriangle.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/PascalsTriangle.java)|
 | 117| Populating Next Right Pointers in Each Node II| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PopulatingNextRightPointersInEachNodeII.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/PopulatingNextRightPointersInEachNode.java)|
@@ -213,7 +213,7 @@
 | 58| Length of Last Word| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/LengthOfLastWord.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/LengthOfLastWord.java), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/length_of_last_word.py)|
 | 57| Insert Interval| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/InsertInterval.cc)|
 | 56| Merge Intervals| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MergeIntervals.cc)|
-| 55| Jump Game| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/JumpGame.cc)|
+| 55| Jump Game| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/JumpGame.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/JumpGame.java)|
 | 54| Spiral Matrix| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/SpiralMatrix.cc)|
 | 53| Maximum Subarray| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MaximumSubarray.cc)|
 | 52| N-Queens II| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/N-QueensII.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/N-queens.java), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/N-QueensII.java)|
@@ -223,7 +223,7 @@
 | 48| Rotate Image| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/RotateImage.cc)|
 | 47| Permutations II| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/PermutationsII.cc)|
 | 46| Permutations| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/Permutations.cc)|
-| 45| Jump Game II| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/JumpGameII.cc)|
+| 45| Jump Game II| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/JumpGameII.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/JumpGameII.java)|
 | 44| Wildcard Matching| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/WildcardMatching.cc)|
 | 43| Multiply Strings| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/MultiplyStrings.cc), [Python](https://github.com/RayZ-O/leetcode/blob/master/Python/multiply_strings.py), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/MultiplyStrings.java)|
 | 42| Trapping Rain Water| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/TrappingRainWater.cc)|
@@ -240,7 +240,7 @@
 | 31| Next Permutation| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/NextPermutation.cc)|
 | 30| Substring with Concatenation of All Words| Hard|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/SubstringWithConcatenationOfAllWords.cc)|
 | 29| Divide Two Integers| Medium|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/DivideTwoIntegers.cc)|
-| 28| Implement strStr()| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ImplementstrStr.cc) |
+| 28| Implement strStr()| Easy| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ImplementstrStr.cc) , [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ImplementStrStr.java)|
 | 27| Remove Element| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/RemoveElement.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/RemoveElement.java)|
 | 26| Remove Duplicates from Sorted Array| Easy|[C++](https://github.com/RayZ-O/leetcode/blob/master/C++/RemoveDuplicatesFromSortedArray.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/RemoveDuplicatesFromSortedArray.java)|
 | 25| Reverse Nodes in k-Group| Hard| [C++](https://github.com/RayZ-O/leetcode/blob/master/C++/ReverseNodesInk-Group.cc), [Java](https://github.com/RayZ-O/leetcode/blob/master/Java/ReverseNodesInKGroup.java)|
